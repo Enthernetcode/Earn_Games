@@ -1,0 +1,5 @@
+sqlite3 admin.db
+SQLite version 3.38.5 2022-05-06 15:25:27
+Enter ".help" for usage hints.
+sqlite> .tables
+sqlite> .exit

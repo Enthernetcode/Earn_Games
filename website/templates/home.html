@@ -5,8 +5,11 @@
   {% for Dashboard in user.Dashboard %}
   <li class="list-group-item">
     {{ Dashboard.balance }}
+  <li class="list-group-item">
     {{ Dashboard.date }}
+  <li class="list-group-item">
     {{ Dashboard.withdrawal }}
+  <li class="list-group-item">
     {{ Dashboard.withdrawal_hist}}
     <button type="button" class="close" onClick="deleteNote({{ note.id }})">
       <span aria-hidden="true">&times;</span>

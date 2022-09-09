@@ -15,7 +15,7 @@
 
     <title>{% block title %}Home{% endblock %}</title>
   </head>
-  <body style="background-color: skyblue; blur: 20px;">
+  <body style="background-color: lightblue; blur: 20px;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <button
         class="navbar-toggler"
@@ -32,6 +32,10 @@
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           <a class="nav-item nav-link" id="dashboard" href="/dashboard">Dashboard</a>
           <a class="nav-item nav-link" id="score" href="/score">score</a>
+          <a class="nav-item nav-link" id="games" href="/games1">Game1</a>
+          <a class="nav-item nav-link" id="games1" href="/games">Game2</a>
+          <a class="nav-item nav-link" id="admin" href="/admin">Admin</a>
+          <a class="nav-item nav-link" id="game2" href="/games2">Games2</a>
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
           <a class="nav-item nav-link" id="signUp" href="/sign_up">Sign Up</a>

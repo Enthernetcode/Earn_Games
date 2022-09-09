@@ -15,24 +15,34 @@ def home():
 @views.route('/dashboard')
 @login_required
 def dashboard():
-   return '<p>This is the dashboard</p>'
+   return render_template('dashboard.html', user=current_user)
 
 
 @views.route('/dashboard/withdrawal' or '/withdrawal')
 @login_required
 def withdrawal():
-   return '<p>This is The withdrawal page</p>'
+   return render_template('withdrawal.html', user=current_user)
 
 
 @views.route('/score')
 @login_required
 def score_history():
-   return '<p>Check your score history here</p>'
+   return render_template('score.html', user=current_user)
 
 @views.route('/games')
 @login_required
 def games_list():
-   return '<h1>pick a game to start playing</h1>'
+   return render_template('games.html', user=current_user)
+
+@views.route('/games1')
+@login_required
+def game_list():
+ return render_template('games1.html', user=current_user)
+
+@views.route('/games2')
+@login_required
+def gamex_list():
+ return render_template('games2.html', user=current_user)
 
 @views.route('/')
 @login_required
@@ -42,10 +52,25 @@ def test_page():
 @views.route('/admin')
 @login_required
 def admin():
- return '<h2> this is 5he admin Page </h2>'
+ return render_template('admin.html', user=current_user)
 
 
 @views.route('/password_recovery')
 @login_required
 def recoverpass():
- return '<h2> Recover your password here </h2>'
+ return render_template('html', user=current_user)
+
+
+class RequestPasswordResetEmail(GenericApiView):
+ serializer_class = RewuestPasswordEmailRequestSerializer
+ def post(self, request):
+  serializer = self.serializer_class(data = request.data)
+  email = request.data['email']
+  if Customuser.object.filter(email = email).exist():
+   user = Custom.object.get(email = email)
+   uidb64 = urlsafe_base64_encoded(smart_byte(user.id))
+   token = PasswordResetTokenGenerator().make_token(user)
+   current_site = get_current_site(request).domain
+   relativeLink = reverse('account:reset-token', kwargs = ['uidb64':uidb64, 'token':token])
+   absurl = f'http://{current_site}{relativelink}'
+   email_body = 'Hello \n 

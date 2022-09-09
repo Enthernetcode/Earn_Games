@@ -1,0 +1,128 @@
+{% extends "base.html" %} {% block title %}Games{% endblock %} {% block
+content %}
+
+
+<title>Earn_Games</title>
+<style type="text/css">
+#canvas {
+  width: 100%;
+  border: 1px solid black;
+ }
+ button {
+     width:50px;
+     height: 30px;
+     margin-bottom: 5px;
+ }
+
+<style type="text/css">
+#canvas {
+  width: 100%;
+  border: 1px solid black;
+ }
+ button {
+     width:50px;
+     height: 30px;
+     margin-bottom: 5px;
+ }
+</style>
+</head>
+<body>
+
+
+
+
+<canvas id="canvas" width="500" height="800">
+  Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+
+<script type="text/javascript">
+window.onload = function() {
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    var x = 250;
+    var y = 0;
+    
+   var t = Date.now();
+    let speed = 3000;
+    let dir = 3;
+    let score = 0;
+
+    let up = document.getElementById('up');
+    let down = document.getElementById('down');
+    let left = document.getElementById('left');
+    let right = document.getElementById('right');
+
+
+
+
+
+function fall(){
+
+  if(y==800){
+  alert("Better luvk next time \n note check your internet speed and phone for lags")
+  y=0;
+  score=0;
+  }else{
+  y=y+1;
+  }
+}
+
+
+
+ canvas.onmousedown = 
+ function() { 
+ dir = 4;
+
+ 
+ }
+canvas.ontouchstart =
+ function() { 
+ dir = 4;
+score+=0.001;
+ }
+ 
+canvas.onmouseup = function() { dir = 0;}
+canvas.ontouchend = function() { dir = 0;}
+
+
+  
+    function draw() {
+        var timePassed = (Date.now() - t) / 1000;
+        t = Date.now();
+
+        context.clearRect(0, 0, 600, 800);
+        context.font = '25px Arial';
+        context.fillStyle = 'black';
+        context.fillText("Score: " + score, 20, 30);
+
+        context.beginPath();
+        context.rect(x, y, 100, 100);
+        context.fillStyle="gold";
+        context.fill();
+
+      
+        
+        if(dir == 3) { 
+            if(y < 800)
+                setInterval(fall,50);
+            
+        }
+        else if(dir == 4) { 
+            if(y > 50 ) {
+                y-=(speed*timePassed);
+                   
+        
+            }
+        }
+
+   
+
+        window.requestAnimationFrame(draw);
+    }
+    draw();
+}
+</script>
+
+
+{% endblock %}

@@ -63,16 +63,16 @@ def Sign_Up():
 
 @auth.route('/about')
 def about_us():
-  return '<h1>know about us here</h1>'
+  return render_template('about.html', user=current_user)
 
 
 @auth.route('/customer_care')
 def contact_comments():
-  return '<h1>speak to an onlime agent or leave a message</h1>'
+  return render_template('contact_us.html', user=current_user)
 
 @auth.route('/newsupdate')
 def simulations():
-  return '<h1>check for lattest update</h1>'
+  return render_template('news_update.html', user=current_user)
 
 @auth.route('/logout')
 @login_required

@@ -15,9 +15,11 @@ def create_app():
 
     from .views import views
     from .auth import auth
+#    from .reset import reset
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+#    app.register_blueprint(reset, url_prefix='/')
 
     from .models import User, Dashboard
 
