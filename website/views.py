@@ -9,13 +9,13 @@ views = Blueprint('views', __name__)
 @views.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
-   return render_template('home.html', user=current_user)
+   return render_template('home.html', user=current_user, balance=00)
 
 
 @views.route('/dashboard')
 @login_required
 def dashboard():
-   return render_template('dashboard.html', user=current_user)
+   return render_template('dashboard.html', user=current_user, dashboard=current_user)
 
 
 @views.route('/dashboard/withdrawal' or '/withdrawal')
@@ -52,25 +52,35 @@ def test_page():
 @views.route('/admin')
 @login_required
 def admin():
- return render_template('admin.html', user=current_user)
+ id = user=current_user.id
+ if id == 2 or 4:
+  return render_template('admin.html', user=current_user)
+ else:
+  flash ('you are not an admin, you can never access this page', category='error')
+  return render_template('home.html', user=current_user)
 
 
-@views.route('/password_recovery')
+#class RequestPasswordResetEmail(GenericApiView):
+# serializer_class = RewuestPasswordEmailRequestSerializer
+# def post(self, request):
+#  serializer = self.serializer_class(data = request.data)
+#  email = request.data['email']
+#  if Customuser.object.filter(email = email).exist():
+#   user = Custom.object.get(email = email)
+#   uidb64 = urlsafe_base64_encoded(smart_byte(user.id))
+#   token = PasswordResetTokenGenerator().make_token(user)
+#   current_site = get_current_site(request).domain
+#   relativeLink = reverse('account:reset-token', kwargs = ['uidb64':uidb64, 'token':token])
+#   absurl = f'http://{current_site}{relativelink}'
+#   email_body = 'Hello \n 
+
+
+@views.route('/funding')
 @login_required
-def recoverpass():
- return render_template('html', user=current_user)
+def wallet_funding():
+ return render_template('fund.html', user=current_user)
 
-
-class RequestPasswordResetEmail(GenericApiView):
- serializer_class = RewuestPasswordEmailRequestSerializer
- def post(self, request):
-  serializer = self.serializer_class(data = request.data)
-  email = request.data['email']
-  if Customuser.object.filter(email = email).exist():
-   user = Custom.object.get(email = email)
-   uidb64 = urlsafe_base64_encoded(smart_byte(user.id))
-   token = PasswordResetTokenGenerator().make_token(user)
-   current_site = get_current_site(request).domain
-   relativeLink = reverse('account:reset-token', kwargs = ['uidb64':uidb64, 'token':token])
-   absurl = f'http://{current_site}{relativelink}'
-   email_body = 'Hello \n 
+@views.route('/verify')
+@login_required
+def verification():
+ return render_template('verify.html', user=current_user)

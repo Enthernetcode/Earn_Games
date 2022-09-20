@@ -1,6 +1,10 @@
 {% extends "base.html" %} {% block title %}Dashboard{% endblock %} {% block
 content %}
 
-
-
+<h3>
+<a>dashboard_id: {{ dashboard.id }} </a>
+<a>dashboard_balance: {{ dashboard.balance }} </a>
+<a>{{ dashboard.withdrawal }} </a>
+<a>{{ dashboard.date }} </a>
+</h3>
 {% endblock %}

@@ -3,7 +3,7 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
-
+from flask_security import recoverable
 
 auth = Blueprint('auth', __name__)
 
@@ -15,8 +15,8 @@ def login():
         password = request.form.get('password')
         data = f'\nEmail: {email} \nPassword: {password}'
         print (f'{data}')
-
         user = User.query.filter_by(email=email).first()
+
         if user:
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
@@ -84,3 +84,26 @@ def logout():
 @login_required
 def user():
  return '<h1>under maintenance</h1>'
+
+@auth.route('/password_recovery', methods=['GET', 'POST'])
+#@login_required
+def recoverpass():
+     if request.method == 'POST':
+        email = request.form.get('email')
+        print (f'{email}')
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            flash(u"Invalid/Unknown email address.")
+            return render_template("sign_up.html")
+            flash('you do not have account sign_up here', category='error')
+#        elif user and password1 != password2:
+#            flash(u"Password mismatch Try again!")
+#            return render_template("password_recovery.html", user=current_user)
+#        else:
+#            user.passwordUpdated_on = datetime.now()
+#            user.password = new_password  #This is my problem line, I guess.
+#            db.session.add(user)
+#            db.session.commit()
+#            flash("Password has been successfully updated!")
+#            return redirect(url_for("login"))
+     return render_template('password_recovery.html', user=current_user)

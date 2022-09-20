@@ -34,8 +34,12 @@
           <a class="nav-item nav-link" id="score" href="/score">score</a>
           <a class="nav-item nav-link" id="games" href="/games1">Game1</a>
           <a class="nav-item nav-link" id="games1" href="/games">Game2</a>
-          <a class="nav-item nav-link" id="admin" href="/admin">Admin</a>
           <a class="nav-item nav-link" id="game2" href="/games2">Games2</a>
+          <a class="nav-item nav-link" id="funds" href="/funding">fund wallet</a>
+          <a class="nav-item nav-link" id="verification" href="/verify">identity verification</a>
+          {% if current_user.id == 2 %}
+          <a class="nav-item nav-link" id="admin" href="/admin">Admin</a>
+          {% endif %}
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
           <a class="nav-item nav-link" id="signUp" href="/sign_up">Sign Up</a>
@@ -87,4 +91,11 @@
       src="{{ url_for('static', filename='index.js') }}"
     ></script>
   </body>
+
+     </div>
+                <font color="skyblue" size="6">
+                  <marquee>Keep An Eye out for intresting offers</marquee>
+                </font>
+              </div>
+
 </html>
